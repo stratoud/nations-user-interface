@@ -1,0 +1,8 @@
+.active {
+  color: #673AB7;
+  font-weight: bold!important;
+}
+
+mat-list-item {
+  z-index: 50;
+}

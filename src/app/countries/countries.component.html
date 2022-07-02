@@ -1,0 +1,8 @@
+<h2>Countries</h2>
+<mat-nav-list>
+  <mat-list-item *ngFor="let country of countries" routerLink="/details/{{country.countryId}}">
+      <a routerLinkActive="active" matLine>
+        {{country.name}} [ {{country.countryCode2}} - {{country.area}} ]
+      </a>
+  </mat-list-item>
+</mat-nav-list>

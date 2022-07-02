@@ -1,0 +1,87 @@
+<h2>Countries Statistics</h2>
+<div>
+    <label>Country</label>
+    <span class="spacer-small"></span>
+    <mat-form-field appearance="fill">
+        <mat-select [(value)]="selected" placeholder="{{countrySelectedName}}" (selectionChange)="getCountriesStatistics($event.value)">
+            <mat-option *ngFor="let country of countries" [value]="country.countryId">
+                {{country.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <span class="spacer"></span>
+    <label>Date From</label>
+    <span class="spacer-small"></span>
+    <mat-form-field appearance="fill">
+        <mat-select [(value)]="yearFrom" placeholder="" (selectionChange)="onYearChangeFrom($event.value)">
+            <mat-option *ngFor="let countryStat of yearsAvailable" [value]="countryStat.year" [disabled]="countryStat.disabledFrom">
+                {{countryStat.year}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <span class="spacer"></span>
+    <label>Date To</label>
+    <span class="spacer-small"></span>
+    <mat-form-field appearance="fill">
+        <mat-select [(value)]="yearTo" placeholder="" (selectionChange)="onYearChangeTo($event.value)">
+            <mat-option *ngFor="let countryStat of yearsAvailable" [value]="countryStat.year" [disabled]="countryStat.disabledTo">
+                {{countryStat.year}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+  
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<!-- Position Column -->
+    <ng-container matColumnDef="countryName">
+        <mat-header-cell *matHeaderCellDef><b> Country Name</b> </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.countryName}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="continentName">
+        <mat-header-cell *matHeaderCellDef><b> Continent Name </b></mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.continentName}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="regionName">
+        <mat-header-cell *matHeaderCellDef><b> Region Name </b></mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.regionName}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="year">
+        <mat-header-cell *matHeaderCellDef><b> Year </b></mat-header-cell>
+        <mat-cell *matCellDef="let element" >
+            <span  *ngIf="element.year else yearDiv">{{element.year}}</span>
+            <ng-template #yearDiv>-</ng-template>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="population">
+        <mat-header-cell *matHeaderCellDef><b> Population </b></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span  *ngIf="element.population else populationDiv">{{element.population}}</span>
+            <ng-template #populationDiv>-</ng-template>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="gdp">
+        <mat-header-cell *matHeaderCellDef><b> GDP </b></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span  *ngIf="element.gdp else gdpDiv">{{element.gdp}}</span>
+            <ng-template #gdpDiv>-</ng-template>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>

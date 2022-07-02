@@ -1,0 +1,27 @@
+mat-header-row {
+    background-color: lightseagreen;
+}
+
+table {
+    width: 100%;
+}
+
+mat-table {
+    overflow: auto;
+    width: 100%;
+}
+
+.mat-footer-row,
+.mat-header-row,
+.mat-row {
+    display: inline-flex;
+    min-width: 100%;
+}
+
+.spacer {
+    padding-right: 60px;
+}
+
+.spacer-small {
+    padding-right: 20px;
+}

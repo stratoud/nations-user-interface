@@ -1,0 +1,44 @@
+<h2>Countries Stats</h2>
+<mat-table [dataSource]="countrystats" class="mat-elevation-z8">
+<!-- Position Column -->
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef><b> Name </b></mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="countryCode3">
+        <mat-header-cell *matHeaderCellDef><b> Country Code </b></mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.countryCode3}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="year">
+        <mat-header-cell *matHeaderCellDef><b> Year </b></mat-header-cell>
+        <mat-cell *matCellDef="let element" >
+            <span  *ngIf="element.year else yearDiv">{{element.year}}</span>
+            <ng-template #yearDiv>-</ng-template>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="population">
+        <mat-header-cell *matHeaderCellDef><b> Population </b></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span  *ngIf="element.population else populationDiv">{{element.population}}</span>
+            <ng-template #populationDiv>-</ng-template>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="gdp">
+        <mat-header-cell *matHeaderCellDef><b> GDP </b></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span  *ngIf="element.gdp else gdpDiv">{{element.gdp}}</span>
+            <ng-template #gdpDiv>-</ng-template>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
